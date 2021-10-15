@@ -1,0 +1,132 @@
+\documentclass{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[english]{babel}
+
+% Set page size and margins
+% Replace `letterpaper' with`a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\usepackage[T1]{fontenc}
+\usepackage{inconsolata}
+
+
+\title{CAAM 519, Homework \# 2: \LaTeX \Submission}
+\author{\texttt{xl106}}
+
+
+\date{September 30, 2021}
+
+\begin{document}
+\maketitle
+
+
+\section{Communicating with remote machines via ssh}
+1. the ssh command I used to log into the clear machine
+%Use Verbatim Environment
+\begin{verbatim}
+    ssh xl106@ssh.clear.rice.edu
+\end{verbatim}
+
+2. The message sent to me is:
+\begin{verbatim}
+    Warning: Permanently added the ECDSA host key for IP address '128.42.124.178' to the list of known hosts.
+The Rice University Network - Unauthorized access is prohibited
+xl106@ssh.clear.rice.edu's password: 
+The Rice University Network
+ ===========================
+ Unauthorized use is prohibited.
+ 
+ This computer system is for authorized users only.  Individuals using this
+ system without authority or in excess of their authority are subject to
+ having all their activities on this system monitored and recorded or
+ examined by any authorized person, including law enforcement, as system
+ personnel deem appropriate.  In the course of monitoring individuals
+ improperly using the system or in the course of system maintenance, the
+ activities of authorized users may also be monitored and recorded.  Any
+ material so recorded may be disclosed as appropriate.  Anyone using this
+ system consents to these terms.
+ 
+ Problems and/or questions should be submitted via the problem tracking
+ system form: http://helpdesk.rice.edu
+ 
+CURRENT USAGE AND LOAD ON THE COMPUTE NODES:
+  Fri Oct 15 00:50:01 CDT 2021
+
+ System                   	# Users   	Load ( 5, 10, 15 minute)      
+   agate.clear.rice.edu   	    2     	  0.39, 0.28, 0.28            
+   amber.clear.rice.edu   	    3     	  0.00, 0.02, 0.05            
+   cobalt.clear.rice.edu  	    0     	  0.05, 0.03, 0.05            
+   jade.clear.rice.edu    	    2     	  0.05, 0.06, 0.05            
+   onyx.clear.rice.edu    	    1     	  0.02, 0.09, 0.12            
+   opal.clear.rice.edu    	    4     	  0.09, 0.05, 0.09            
+   pyrite.clear.rice.edu  	    2     	  0.01, 0.03, 0.05            
+
+NOTE: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ 
+   Please log an RT ticket for any issues you may have.
+ 
+   Please log a ticket at https://help.rice.edu if you have any of the following:
+     Feel documentation is lacking.
+     Have trouble getting into the system.
+     Feel the system is missing a tool.
+ 
+   NOTE: svn.rice.edu is now READ ONLY in preparation for removal 
+         from service on January 8th, 2022
+ 
+   NOTE: If you don't have a home drive when using Clear, please 
+         create a ticket in help.rice.edu  Be sure to put 
+         "need clear home directory" in the subject and one will 
+         be setup for you.
+ 
+   NOTE: New tools available.  Maven 3.8.2, gcc 9.3.1, java 11, clang 11.0.1,
+         julia 1.6.1, python 3.9.1, vim 8.2 w/ python support.  
+         Plus special purpose applications: 
+           Circuit Design (ngspice, magic), Network Simulation (ns-3).
+         See kb.rice.edu for details.
+ 
+   CLEAR NEWS -- https://kb.rice.edu/internal/page.php?id=71856
+   Tips and Hints -- https://kb.rice.edu/internal/page.php?id=71857
+ 
+
+\end{verbatim}
+
+3. the output of the following shell commands: echo $HOSTNAME
+
+\begin{verbatim}
+    [xl106@opal ~]$ echo $HOSTNAME
+    opal.clear.rice.edu
+
+\end{verbatim}
+
+4. Also command you use to change your shell prompt text to > In my Ubuntu running in VirtualBox
+
+
+
+\section{A script to build a latex document while hiding auxiliary files}
+The programming script is as the following, in addition to comments I added before, I add more descriptions for each line of my code, the code is as the following:
+\begin{lstlisting}
+        #!/bin/bash \\
+        #if the directory is not duild file, make the directory with .build\\
+        if [ ! -d ".build" ]; then\\
+            mkdir .build\\
+        fi\\
+
+        #create the project.tex file\\
+        pdflatex -output-directory=.build $1.tex\\
+        #move the pdf file\\
+        mv .build/$1.pdf .\\
+
+
+\end{lstlisting}
+Possible concerns about using this bash script:\\
+1. I used $~/Downloads$ and $~/Downloads/.build$. Thus, when downloading clean-build.sh file, I think it is better to use it at $~/Downloads$ directory, which will decrease a lot of unnecessary troubles.\\
+2. If the project name typed in the terminal contains spaces between different words or the $"."$ in the file, $pdflatex$ may fail to compile the $.tex$ file. \\
+
+\end{document}
