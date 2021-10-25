@@ -1,0 +1,5 @@
+clean-build.sh file is empty  -15;
+linecount.sh LGTM;
+Poetry_table.shm LGTM;
+latex-submission.tex LGTM;
+total: 75/90
